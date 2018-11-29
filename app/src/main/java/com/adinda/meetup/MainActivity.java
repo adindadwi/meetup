@@ -18,8 +18,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //setelah loading maka akan langsung berpindah ke home activity
-                Intent home=new Intent(MainActivity.this, Home.class);
-                startActivity(home);
+                Intent Home=new Intent(MainActivity.this, Home.class);
+                startActivity(Home);
                 finish();
-            }
-        },waktu_loading);     } }
+                }
+        },
+                waktu_loading);
+    }
+}
