@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //setelah loading maka akan langsung berpindah ke home activity
-                Intent Home=new Intent(MainActivity.this, Home.class);
-                startActivity(Home);
+                //setelah loading maka akan langsung berpindah ke login activity
+                Intent login=new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(login);
                 finish();
                 }
         },
