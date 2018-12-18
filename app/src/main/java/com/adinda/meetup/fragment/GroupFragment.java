@@ -1,5 +1,6 @@
 package com.adinda.meetup.fragment;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,14 +11,15 @@ import android.view.ViewGroup;
 
 import com.adinda.meetup.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GroupFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GroupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+///**
+// * A simple {@link Fragment} subclass.
+// * Activities that contain this fragment must implement the
+// * {@link PhotosFragment.OnFragmentInteractionListener} interface
+// * to handle interaction events.
+// * Use the {@link PhotosFragment#newInstance} factory method to
+// * create an instance of this fragment.
+// */
+
 public class GroupFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +42,7 @@ public class GroupFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupFragment.
+     * @return A new instance of fragment PhotosFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static GroupFragment newInstance(String param1, String param2) {
@@ -78,12 +80,12 @@ public class GroupFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override

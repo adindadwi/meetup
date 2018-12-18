@@ -33,14 +33,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Cursor cursor = db.rawQuery("SELECT * FROM mahasiswa WHERE nama = '" +
+                Cursor cursor = db.rawQuery("SELECT * FROM user WHERE username = '" +
                         Uname.getText().toString() + "' AND password = '" +
                         Pwd.getText().toString() + "'", null);
                 cursor.moveToFirst();
 
                 if (cursor.getCount() > 0)
                 {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, Main2activity.class);
                     intent.putExtra("nama", cursor.getString(0).toString());
                     intent.putExtra("password", cursor.getString(1).toString());
                     startActivity(intent);
