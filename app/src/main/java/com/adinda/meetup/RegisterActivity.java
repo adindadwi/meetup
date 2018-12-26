@@ -17,7 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
     DataHelper dbHelper;
     Button register;
     TextView login;
-    EditText pwd, nama, jk, nim;
+    EditText password, username, email;
 
     private NestedScrollView nestedScrollView;
 
@@ -28,10 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         dbHelper = new DataHelper(this);
 
-        nim = findViewById(R.id.inputNIM);
-        nama = findViewById(R.id.inputNama);
-        jk = findViewById(R.id.inputJk);
-        pwd = findViewById(R.id.inputPassword);
+        username = findViewById(R.id.inputUsername);
+        password = findViewById(R.id.inputPassword);
+        email = findViewById(R.id.inputEmail);
 
         register = findViewById(R.id.btnRegister);
         login = findViewById(R.id.tvLogin);
@@ -40,11 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                db.execSQL("INSERT INTO mahasiswa ( nim, nama, jk, password) VALUES ('" +
-                        nim.getText().toString() + "','" +
-                        nama.getText().toString() + "','" +
-                        jk.getText().toString() + "','" +
-                        pwd.getText().toString() + "')");
+                db.execSQL("INSERT INTO user ( username,email,password) VALUES ('" +
+                        username.getText().toString() + "','" +
+                        email.getText().toString() + "','" +
+                        password.getText().toString() + "')");
 
                 Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_SHORT).show();
                 emptyEditText();
@@ -61,9 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void emptyEditText(){
-        nim.setText(null);
-        nama.setText(null);
-        jk.setText(null);
-        pwd.setText(null);
+        username.setText(null);
+        email.setText(null);
+        password.setText(null);
     }
 }

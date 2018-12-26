@@ -1,6 +1,5 @@
 package com.adinda.meetup.fragment;
 
-
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,16 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.adinda.meetup.R;
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
 
-///**
-// * A simple {@link Fragment} subclass.
-// * Activities that contain this fragment must implement the
-// * {@link PhotosFragment.OnFragmentInteractionListener} interface
-// * to handle interaction events.
-// * Use the {@link PhotosFragment#newInstance} factory method to
-// * create an instance of this fragment.
-// */
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link GroupFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link GroupFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class GroupFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +32,9 @@ public class GroupFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    FloatingActionMenu materialDesignFAM;
+    com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
+
     public GroupFragment() {
         // Required empty public constructor
     }
@@ -42,7 +45,7 @@ public class GroupFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PhotosFragment.
+     * @return A new instance of fragment GroupFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static GroupFragment newInstance(String param1, String param2) {
@@ -60,6 +63,37 @@ public class GroupFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+            materialDesignFAM = (FloatingActionMenu) getView().findViewById(R.id.material_design_android_floating_action_menu);
+            floatingActionButton1 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item1);
+            floatingActionButton2 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item2);
+            floatingActionButton3 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item3);
+            floatingActionButton4 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item4);
+
+            floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //TODO something when floating action menu first item clicked
+                    //untuk aksi ketika di klik
+                }
+            });
+            floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //TODO something when floating action menu second item clicked
+
+                }
+            });
+            floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //TODO something when floating action menu third item clicked
+
+                }
+            });
+            floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //TODO something when floating action menu third item clicked
+
+                }
+            });
         }
     }
 
@@ -80,12 +114,12 @@ public class GroupFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
