@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.adinda.meetup.Adapter.EventAdapter;
+import com.adinda.meetup.Event;
 import com.adinda.meetup.R;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private EventAdapter adapter;
-    private List<Event> albumList;
+    private List<Event> eventList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;

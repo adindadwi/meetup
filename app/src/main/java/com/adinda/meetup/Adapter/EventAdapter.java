@@ -25,9 +25,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     private Context mContext;
     private List<Event> eventList;
 
-    EventAdapter(ArrayList namaList,ArrayList dateList,ArrayList placeList,ArrayList photoList,Context mContext){
+    EventAdapter(ArrayList eventList,Context mContext){
         this.mContext=mContext;
-        this.eventList
+        this.eventList=eventList;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,12 +53,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder,@SuppressLint("RecyclerView") final int position) {
-        Event event = eventList.get(position)
-        holder.event.setText(event.getNumOfEvent() + " event");
+    public void onBindViewHolder(final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        Event event = eventList.get(position);
+        holder.nama.setText(event.getName());
+        holder.date.setText(event.getDate());
+        holder.place.setText(event.getPlace());
 
         // loading event cover using Glide library
-        Glide.with(mContext).load(event.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(event.getPhoto()).into(holder.photo);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,4 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         return eventList.size();
     }
 }
-{
 
-}

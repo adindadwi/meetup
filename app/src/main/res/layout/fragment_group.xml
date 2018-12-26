@@ -24,8 +24,8 @@
         fab:menu_animationDelayPerItem="55"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#00574B"
-        fab:menu_colorPressed="#008577"
+        fab:menu_colorNormal="@color/colorPrimaryDark"
+        fab:menu_colorPressed="@color/colorPrimary"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_label="Floating Action Menu"
         fab:menu_fab_size="mini"
@@ -56,33 +56,33 @@
             android:id="@+id/material_design_floating_action_menu_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_explore_white_24dp"
-            fab:fab_label="Explore"
+            android:src="@drawable/ic_group_add_white_24dp"
+            fab:fab_label="Add Group"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_email_white_24dp"
-            fab:fab_label="Messange"
+            android:src="@drawable/camera"
+            fab:fab_label="Tambah photo"
             fab:fab_size="mini" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/material_design_floating_action_menu_item3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_filter_list_white_24dp"
-            fab:fab_label="Filter"
-            fab:fab_size="mini" />
+        <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/material_design_floating_action_menu_item3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_filter_list_white_24dp"-->
+            <!--fab:fab_label="Filter"-->
+            <!--fab:fab_size="mini" />-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/material_design_floating_action_menu_item4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_chat_white_24dp"
-            fab:fab_label="Pesan Baru"
-            fab:fab_size="mini" />
+        <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/material_design_floating_action_menu_item4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_chat_white_24dp"-->
+            <!--fab:fab_label="Pesan Baru"-->
+            <!--fab:fab_size="mini" />-->
     </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>
