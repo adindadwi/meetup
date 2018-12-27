@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/one" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_library"
+            android:icon="@drawable/ic_group_add_white_24dp"
+            android:title="@string/nav_group" />
+    </group>
+
+    <item android:title="@string/upcoming_event">
+        <menu>
+            <item
+                android:id="@+id/nav_event"
+                android:icon="@drawable/ic_date_range_black_24dp"
+                android:title="@string/nav_event" />
+        </menu>
+    </item>
+</menu>
