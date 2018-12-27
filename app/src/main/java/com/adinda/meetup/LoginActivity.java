@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (cursor.getCount() > 0)
                 {
-                    Intent intent = new Intent(LoginActivity.this, Main2activity.class);
-                    intent.putExtra("nama", cursor.getString(0).toString());
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("username", cursor.getString(0).toString());
                     intent.putExtra("password", cursor.getString(1).toString());
                     startActivity(intent);
                 }else{

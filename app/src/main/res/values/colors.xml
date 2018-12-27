@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorPrimary">#DB7093</color>-->
+    <color name="colorPrimary">#F50050</color>
+    <color name="colorPrimaryDark">#F50057</color>
+    <color name="colorAccent">#FF4081</color>
     <color name="background">#FFFFFF</color>
     <color name="colorDarker">#d3c498</color>
     <color name="colorLighter">#FFF4D1</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="appPrimary">#D81B60</color>
+    <color name="appPrimaryPressed">#D81B60</color>
+    <color name="colorB">#F1F5F8</color>
+    <color name="colorGraylight">#FAFAFA</color>
+    <color name="viewBg">#f1f5f8</color>
 </resources>
