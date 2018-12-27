@@ -13,7 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.adinda.meetup.model.Event;
+=======
+import com.adinda.meetup.Event;
+>>>>>>> remotes/origin/master
 import com.adinda.meetup.R;
 import com.bumptech.glide.Glide;
 
