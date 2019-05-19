@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.adinda.meetup.GroupActivity">
+    tools:context="com.adinda.meetup.EventActivity">
 
     <ListView
         android:id="@+id/listView1"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         style="?android:attr/borderlessButtonStyle"
         android:drawableLeft="@drawable/ic_add_white_24dp"
-        android:text="Make a new group"
+        android:text="Make a new event"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

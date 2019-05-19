@@ -6,6 +6,8 @@ public class Event {
     private String place ;
     private int photo;
 
+    public Event() {
+    }
 
     public Event(String name, String date,String place, int photo ) {
         this.name = name;

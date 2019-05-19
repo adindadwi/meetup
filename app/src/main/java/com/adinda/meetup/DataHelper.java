@@ -45,9 +45,11 @@ public class DataHelper extends SQLiteOpenHelper{
 
     // Table Names
     private static final String TABLE_USER = "user";
-    private static final String TABLE_GRUP = "grup";
+    private static final String TABLE_GRUP = "grupmeetup";
     private static final String TABLE_EVENT = "event";
+//    private static final String TABLE_CATEGORY = "category";
     private static final String TABLE_CATEGORYEVENT = "eventcategory";
+    private static final String TABLE_CATEGORYGROUP = "groupcategory";
     private static final String TABLE_USERGROUP = "usergroup";
     private static final String TABLE_GROUPEVENT = "groupevent";
 
@@ -60,20 +62,30 @@ public class DataHelper extends SQLiteOpenHelper{
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
 
-    // USER Table - column names
-    private static final String KEY_CATEGORY_NAME = "categoryname";
-
-    // user Table Create Statements
-    private static final String CREATE_TABLE_CATEGORYEVENT = "CREATE TABLE "
-            + TABLE_CATEGORYEVENT + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORY_NAME
-            + " TEXT," + KEY_CREATED_AT
-            + " DATETIME" + ")";
-
     // user Table Create Statements
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + TABLE_USER + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME
             + " TEXT," + KEY_EMAIL + " TEXT," + KEY_PASSWORD + " TEXT, " + KEY_CREATED_AT
+            + " DATETIME " + ")";
+
+    // KEY_CATEGORYEVENT_NAME Table - column names
+    private static final String KEY_CATEGORYEVENT_NAME = "categoryname";
+
+    // user Table Create Statements
+    private static final String CREATE_TABLE_CATEGORYEVENT = "CREATE TABLE "
+            + TABLE_CATEGORYEVENT + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORYEVENT_NAME
+            + " TEXT," + KEY_CREATED_AT
             + " DATETIME" + ")";
+
+    // KEY_CATEGORYGROUP_NAME Table - column names
+    private static final String KEY_CATEGORYGROUP_NAME = "categoryname";
+    private static final String KEY_GROUP_ID = "group_id";
+
+    // user Table Create Statements
+    private static final String CREATE_TABLE_CATEGORYGROUP = "CREATE TABLE "
+            + TABLE_CATEGORYGROUP + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORYGROUP_NAME
+            + " TEXT," + KEY_CREATED_AT
+            + " DATETIME,"+KEY_GROUP_ID + "INTEGER,"+"FOREIGN KEY ("+KEY_GROUP_ID+") REFERENCES "+TABLE_GRUP+"("+KEY_ID+")" + ")";
 
     // EVENT Table - column names
     private static final String KEY_EVENT_NAME = "event_name";
@@ -85,32 +97,31 @@ public class DataHelper extends SQLiteOpenHelper{
 
     // EVENT table create statement
     private static final String CREATE_TABLE_EVENT = "CREATE TABLE " + TABLE_EVENT
-            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_EVENT_NAME + " TEXT," + KEY_EVENT_DESCRIPTION + " TEXT, "         + KEY_EVENT_PHOTO+"IMAGE, " + KEY_EVENT_CATEGORIES + " TEXT, "
+            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_EVENT_NAME + " TEXT," + KEY_EVENT_DESCRIPTION + " TEXT, "+ KEY_EVENT_PHOTO+"IMAGE, " + KEY_EVENT_CATEGORIES + " TEXT, "
             + KEY_EVENT_DATE + "DATETIME," + KEY_EVENT_PLACE + "TEXT,"
             + KEY_CREATED_AT + " DATETIME" + ")";
 
     // GROUP table
     private static final String KEY_GROUP_NAME = "group_name";
     private static final String KEY_GROUP_DESCRIPTION = "group_description";
-    private static final String KEY_GROUP_CATEGORIES = "group_categories";
-    private static final String KEY_GROUP_MEMBERS = "group_members";
-    private static final String KEY_GROUP_EVENTS = "group_events";
+    private static final String KEY_GROUP_ADMIN = "group_admin_id";
 
     // group table create statement
     private static final String CREATE_TABLE_GRUP = "CREATE TABLE " + TABLE_GRUP
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_GROUP_NAME + " TEXT," + KEY_GROUP_DESCRIPTION + " TEXT, "
-            + KEY_GROUP_CATEGORIES + " TEXT, " + KEY_GROUP_EVENTS + "TEXT," + KEY_GROUP_MEMBERS + "TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_GROUP_ADMIN + " INTEGER, "
+            + KEY_CREATED_AT + " DATETIME,"
+            +"FOREIGN KEY ("+KEY_GROUP_ADMIN+") REFERENCES "+TABLE_USER+"("+KEY_ID+")" + ")";
 
     // user_group Table - column names
     private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_GROUP_ID = "group_id";
 
     // USER_GROUP table create statement
     private static final String CREATE_TABLE_USERGROUP = "CREATE TABLE "
             + TABLE_USERGROUP + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_USER_ID + " INTEGER," + KEY_GROUP_ID  + " INTEGER,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+            + KEY_CREATED_AT + " DATETIME,"+"FOREIGN KEY ("+KEY_USER_ID+") REFERENCES "+TABLE_USER+"("+KEY_ID+"),"
+            +"FOREIGN KEY ("+KEY_GROUP_ID+") REFERENCES "+TABLE_GRUP+"("+KEY_ID+")" + ")";
 
     // event_group table
     private static final String KEY_GROUPEVENT_ID = "groupevent_id";

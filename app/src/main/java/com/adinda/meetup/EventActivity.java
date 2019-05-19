@@ -14,18 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class GroupActivity extends AppCompatActivity {
+public class EventActivity extends AppCompatActivity {
     String[] add;
     ListView GroupView;
     Menu menu;
     protected Cursor cursor;
     DataHelper dbcenter;
-    public static GroupActivity ma;
+    public static EventActivity ma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group);
+        setContentView(R.layout.activity_event);
 
         Button btn=(Button)findViewById(R.id.button2);
 
@@ -34,7 +34,7 @@ public class GroupActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent inte = new Intent(GroupActivity.this, BuatGroup.class);
+                Intent inte = new Intent(EventActivity.this, BuatEvent.class);
                 startActivity(inte);
             }
         });
@@ -45,8 +45,8 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     public void RefreshList(){
-        SQLiteDatabase db = dbcenter.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM grupmeetup",null);
+        SQLiteDatabase db = dbcenter.getWritableDatabase();
+        cursor = db.rawQuery("SELECT * FROM event",null);
         add = new String[cursor.getCount()];
         cursor.moveToFirst();
         for (int cc=0; cc < cursor.getCount(); cc++){
@@ -57,27 +57,29 @@ public class GroupActivity extends AppCompatActivity {
         GroupView.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, add));
         GroupView.setSelected(true);
         GroupView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
                 final String selection = add[arg2]; //.getItemAtPosition(arg2).toString();
-                final CharSequence[] dialogitem = {"Detail Group", "Update Group", "Hapus Group"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(GroupActivity.this);
+                final CharSequence[] dialogitem = {"Detail Event", "Update Event", "Hapus Event"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(EventActivity.this);
                 builder.setTitle("Pilihan");
                 builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         switch(item){
                             case 0 :
-                                Intent i = new Intent(getApplicationContext(), DetailGroup.class);
-                                i.putExtra("group_name", selection);
+                                Intent i = new Intent(getApplicationContext(), DetailEvent.class);
+                                i.putExtra("event_name", selection);
                                 startActivity(i);
                                 break;
                             case 1 :
-                                Intent in = new Intent(getApplicationContext(), UpdateGroup.class);
-                                in.putExtra("group_name", selection);
+                                Intent in = new Intent(getApplicationContext(), UpdateEvent.class);
+                                in.putExtra("event_name", selection);
                                 startActivity(in);
                                 break;
                             case 2 :
                                 SQLiteDatabase db = dbcenter.getWritableDatabase();
-                                db.execSQL("delete from grupmeetup where group_name = '"+selection+"'");
+                                db.execSQL("delete from event where event_name = "+selection);
                                 RefreshList();
                                 break;
                         }
@@ -87,6 +89,4 @@ public class GroupActivity extends AppCompatActivity {
             }});
         ((ArrayAdapter)GroupView.getAdapter()).notifyDataSetInvalidated();
     }
-
-
 }

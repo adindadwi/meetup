@@ -1,22 +1,36 @@
 package com.adinda.meetup.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.adinda.meetup.BuatGroup;
 import com.adinda.meetup.CameraActivity;
+import com.adinda.meetup.DataHelper;
+import com.adinda.meetup.DetailGroup;
 import com.adinda.meetup.GroupActivity;
 import com.adinda.meetup.HomeActivity;
 import com.adinda.meetup.LoginActivity;
 import com.adinda.meetup.MainActivity;
 import com.adinda.meetup.R;
+import com.adinda.meetup.UpdateGroup;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.clans.fab.FloatingActionButton;
 
@@ -39,9 +53,15 @@ public class GroupFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    String[] add;
+    ListView GroupView;
+    protected Cursor cursor;
+    DataHelper dbcenter;
+    Context mBase;
+    public static GroupFragment gf;
 
     FloatingActionMenu materialDesignFAM;
-    com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
+    com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2;
 
     public GroupFragment() {
         // Required empty public constructor
@@ -72,39 +92,6 @@ public class GroupFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-            materialDesignFAM = (FloatingActionMenu) getView().findViewById(R.id.material_design_android_floating_action_menu);
-            floatingActionButton1 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item1);
-            floatingActionButton2 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item2);
-//            floatingActionButton3 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item3);
-//            floatingActionButton4 = (FloatingActionButton) getView().findViewById(R.id.material_design_floating_action_menu_item4);
-
-            floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    //TODO something when floating action menu first item clicked
-                    Intent intent = new Intent(getActivity(), CameraActivity.class);
-                    startActivity(intent);
-                }
-            });
-            floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                        //TODO something when floating action menu first item clicked
-                        Intent intent = new Intent(getActivity(), GroupActivity.class);
-                        startActivity(intent);
-                }
-            });
-//            floatingActionButton3.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    //TODO something when floating action menu third item clicked
-//
-//                }
-//            });
-//            floatingActionButton4.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    //TODO something when floating action menu third item clicked
-//
-//                }
-//            });
         }
     }
 
@@ -112,7 +99,119 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false);
+        View view = inflater.inflate(R.layout.fragment_group, container, false);
+        materialDesignFAM = (FloatingActionMenu) view.findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item2);
+
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu first item clicked
+                Intent intent = new Intent(getActivity(), GroupActivity.class);
+                startActivity(intent);
+            }
+        });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu first item clicked
+                Intent intent = new Intent(getActivity(), CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+        dbcenter = new DataHelper(getActivity());
+        SQLiteDatabase db = dbcenter.getWritableDatabase();
+        cursor = db.rawQuery("SELECT * FROM grupmeetup",null);
+        add = new String[cursor.getCount()];
+        cursor.moveToFirst();
+        for (int cc=0; cc < cursor.getCount(); cc++){
+            cursor.moveToPosition(cc);
+            add[cc] = cursor.getString(1).toString();
+        }
+        GroupView = (ListView)view.findViewById(R.id.listView1);
+        GroupView.setAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, add));
+        GroupView.setSelected(true);
+        GroupView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
+                final String selection = add[arg2]; //.getItemAtPosition(arg2).toString();
+                final CharSequence[] dialogitem = {"Detail Group", "Update Group", "Hapus Group"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Pilihan");
+                builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        switch(item){
+                            case 0 :
+                                Intent i = new Intent(getActivity(), DetailGroup.class);
+                                i.putExtra("group_name", selection);
+                                startActivity(i);
+                                break;
+                            case 1 :
+                                Intent in = new Intent(getActivity(), UpdateGroup.class);
+                                in.putExtra("group_name", selection);
+                                startActivity(in);
+                                break;
+                            case 2 :
+                                SQLiteDatabase db = dbcenter.getWritableDatabase();
+                                db.execSQL("delete from grupmeetup where group_name = '"+selection+"'");
+                                RefreshList();
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
+            }});
+        ((ArrayAdapter)GroupView.getAdapter()).notifyDataSetInvalidated();
+
+        return view;
+    }
+
+    public void RefreshList(){
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM grupmeetup",null);
+        add = new String[cursor.getCount()];
+        cursor.moveToFirst();
+        for (int cc=0; cc < cursor.getCount(); cc++){
+            cursor.moveToPosition(cc);
+            add[cc] = cursor.getString(1).toString();
+        }
+        GroupView = (ListView)getView().findViewById(R.id.listView1);
+        GroupView.setAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, add));
+        GroupView.setSelected(true);
+        GroupView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
+                final String selection = add[arg2]; //.getItemAtPosition(arg2).toString();
+                final CharSequence[] dialogitem = {"Detail Group", "Update Group", "Hapus Group"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Pilihan");
+                builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        switch(item){
+                            case 0 :
+                                Intent i = new Intent(getApplicationContext(), DetailGroup.class);
+                                i.putExtra("group_name", selection);
+                                startActivity(i);
+                                break;
+                            case 1 :
+                                Intent in = new Intent(getApplicationContext(), UpdateGroup.class);
+                                in.putExtra("group_name", selection);
+                                startActivity(in);
+                                break;
+                            case 2 :
+                                SQLiteDatabase db = dbcenter.getWritableDatabase();
+                                db.execSQL("delete from grupmeetup where group_name = '"+selection+"'");
+                                RefreshList();
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
+            }});
+        ((ArrayAdapter)GroupView.getAdapter()).notifyDataSetInvalidated();
+    }
+
+    public Context getApplicationContext() {
+        return mBase.getApplicationContext();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

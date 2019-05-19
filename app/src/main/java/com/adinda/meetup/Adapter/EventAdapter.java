@@ -13,12 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import com.adinda.meetup.model.Event;
-=======
 import com.adinda.meetup.Event;
->>>>>>> remotes/origin/master
 import com.adinda.meetup.R;
+import com.adinda.meetup.fragment.HomeFragment;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -26,10 +23,10 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private List<Event> eventList;
+    public Context mContext;
+    public List<Event> eventList;
 
-    EventAdapter(ArrayList eventList,Context mContext){
+    public EventAdapter(Context mContext, List<Event> eventList){
         this.mContext=mContext;
         this.eventList=eventList;
     }
